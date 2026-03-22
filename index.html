@@ -1,338 +1,487 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MAUVAISE CONTINUITÉ — MONTRÉAL</title>
-<style>
-  :root {
-    --green: #c8ff00;
-    --orange: #ff4400;
-    --bg: #0a0a0a;
-    --fg: #e8e8e8;
-    --dim: #666;
-  }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAUVAISE CONTINUITÉ — MONTRÉAL</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap');
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Courier New', Courier, monospace;
-  }
+    :root {
+      --green: #00ff41;
+      --green-dim: #00cc33;
+      --green-faint: #003a0e;
+      --green-glow: rgba(0,255,65,0.08);
+      --bg: #0a0a0a;
+      --dim: #006620;
+    }
 
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-    background-size: 200px 200px;
-    pointer-events: none;
-    z-index: 9997;
-    opacity: 0.35;
-  }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; }
 
-  body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparent 0px,
-      transparent 2px,
-      rgba(0, 0, 0, 0.18) 2px,
-      rgba(0, 0, 0, 0.18) 4px
-    );
-    pointer-events: none;
-    z-index: 9998;
-  }
+    body {
+      background: var(--bg);
+      color: var(--green);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 15px;
+      line-height: 1.8;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
 
-  body {
-    background-color: var(--bg);
-    color: var(--fg);
-    min-height: 100vh;
-    padding: 3rem 1.5rem;
-    line-height: 1.75;
-    font-size: 0.95rem;
-    position: relative;
-    overflow-x: hidden;
-  }
+    /* ── CRT SCANLINES ── */
+    .crt-scanlines {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.1) 2px,
+        rgba(0,0,0,0.1) 4px
+      );
+      pointer-events: none;
+      z-index: 1000;
+    }
 
-  body.glitch-active {
-    animation: bodyGlitch 0.3s steps(2, end);
-  }
+    /* ── CRT VIGNETTE ── */
+    .crt-vignette {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at center,
+        transparent 60%,
+        rgba(0,0,0,0.7) 100%
+      );
+      pointer-events: none;
+      z-index: 1001;
+    }
 
-  @keyframes bodyGlitch {
-    0%   { transform: translate(0); filter: none; }
-    20%  { transform: translate(-4px, 0); filter: hue-rotate(90deg) saturate(2); }
-    40%  { transform: translate(4px, 0);  filter: hue-rotate(-90deg) saturate(3); }
-    60%  { transform: translate(-2px, 0); filter: hue-rotate(180deg); }
-    80%  { transform: translate(2px, 0);  filter: none; }
-    100% { transform: translate(0); filter: none; }
-  }
+    /* ── CRT FLICKER ── */
+    .crt-flicker {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,255,65,0.015);
+      pointer-events: none;
+      z-index: 999;
+      animation: screenflicker 0.15s infinite;
+    }
 
-  .glitch-overlay-r,
-  .glitch-overlay-b {
-    display: none;
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: screen;
-  }
-  body.glitch-active .glitch-overlay-r {
-    display: block;
-    background: rgba(255,0,0,0.04);
-    transform: translate(-6px, 0);
-  }
-  body.glitch-active .glitch-overlay-b {
-    display: block;
-    background: rgba(0,0,255,0.04);
-    transform: translate(6px, 0);
-  }
+    @keyframes screenflicker {
+      0%   { opacity: 1; }
+      50%  { opacity: 0.97; }
+      100% { opacity: 1; }
+    }
 
-  .container {
-    max-width: 760px;
-    margin: 0 auto;
-  }
+    /* ── PHOSPHOR GLOW on text ── */
+    body {
+      text-shadow: 0 0 4px rgba(0,255,65,0.4);
+    }
 
-  .signal {
-    color: var(--green);
-    font-size: 0.75rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    margin-bottom: 3rem;
-    animation: blink-signal 2.4s step-start infinite;
-    text-shadow: 0 0 8px var(--green);
-  }
+    /* ── HORIZONTAL GLITCH LINE ── */
+    .glitch-line {
+      position: fixed;
+      left: 0; right: 0;
+      height: 2px;
+      background: rgba(0,255,65,0.15);
+      pointer-events: none;
+      z-index: 1002;
+      animation: glitchMove 7s infinite;
+      opacity: 0;
+    }
 
-  @keyframes blink-signal {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
+    @keyframes glitchMove {
+      0%   { top: -10px; opacity: 0; }
+      10%  { opacity: 0; }
+      11%  { opacity: 1; top: 20%; }
+      13%  { opacity: 0; top: 22%; }
+      40%  { top: 60%; opacity: 0; }
+      41%  { opacity: 0.8; }
+      43%  { opacity: 0; top: 63%; }
+      100% { top: 110%; opacity: 0; }
+    }
 
-  .site-title {
-    color: var(--green);
-    font-size: clamp(1.6rem, 5vw, 2.8rem);
-    font-weight: 900;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    line-height: 1.1;
-    margin-bottom: 0.75rem;
-    text-shadow:
-      0 0 10px var(--green),
-      0 0 30px rgba(200, 255, 0, 0.3);
-    position: relative;
-    display: inline-block;
-  }
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 50px 30px 80px;
+      position: relative;
+      z-index: 2;
+    }
 
-  .site-title::after {
-    content: '█';
-    display: inline-block;
-    animation: blink-cursor 1s step-end infinite;
-    margin-left: 4px;
-    font-size: 0.85em;
-  }
+    /* ── HEADER ── */
+    .header {
+      margin-bottom: 50px;
+      border-bottom: 1px solid var(--dim);
+      padding-bottom: 28px;
+    }
 
-  @keyframes blink-cursor {
-    0%, 49% { opacity: 1; }
-    50%, 100% { opacity: 0; }
-  }
+    .signal-line {
+      font-size: 11px;
+      color: var(--dim);
+      letter-spacing: .15em;
+      margin-bottom: 8px;
+    }
 
-  .site-title.title-glitch {
-    animation: titleGlitch 0.6s steps(3, end);
-  }
+    .site-title {
+      font-family: 'VT323', monospace;
+      font-size: clamp(38px, 9vw, 72px);
+      letter-spacing: .08em;
+      line-height: 1;
+      text-shadow: 0 0 20px var(--green), 0 0 50px rgba(0,255,65,0.3), 0 0 2px #fff;
+      animation: titleflicker 10s infinite;
+      margin-bottom: 8px;
+    }
 
-  @keyframes titleGlitch {
-    0%   { clip-path: inset(0 0 100% 0); transform: skewX(0deg); }
-    10%  { clip-path: inset(0 0 80% 0);  transform: skewX(-4deg); color: var(--orange); }
-    20%  { clip-path: inset(10% 0 60% 0); transform: skewX(4deg); }
-    30%  { clip-path: inset(0 0 40% 0);  transform: skewX(-2deg); color: var(--green); }
-    50%  { clip-path: inset(0 0 20% 0);  transform: skewX(1deg); }
-    70%  { clip-path: inset(0 0 0% 0);   transform: skewX(0deg); }
-    85%  { transform: translate(3px, 0) skewX(-1deg); filter: hue-rotate(60deg); }
-    100% { transform: translate(0); filter: none; clip-path: none; }
-  }
+    @keyframes titleflicker {
+      0%,93%,100% { opacity:1; }
+      94% { opacity:0.7; }
+      95% { opacity:1; }
+      97% { opacity:0.85; }
+      98% { opacity:1; }
+    }
 
-  .site-subtitle {
-    color: var(--dim);
-    font-size: 0.85rem;
-    letter-spacing: 0.12em;
-    margin-bottom: 4rem;
-    border-left: 2px solid var(--orange);
-    padding-left: 1rem;
-  }
+    .site-subtitle {
+      color: var(--dim);
+      font-size: 11px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
 
-  h2.section-title {
-    color: var(--orange);
-    font-size: 1rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    margin-bottom: 1.5rem;
-    text-shadow: 0 0 8px rgba(255, 68, 0, 0.5);
-  }
+    .progress-bar {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      margin-bottom: 4px;
+    }
+    .bar-fill  { display:inline-block; width:12px; height:12px; background:var(--green); box-shadow:0 0 4px var(--green); }
+    .bar-empty { display:inline-block; width:12px; height:12px; background:var(--green-faint); }
+    .signal-status { font-size:11px; color:var(--dim); margin-left:10px; }
 
-  h2.section-title::before {
-    content: '>> ';
-    color: var(--green);
-  }
+    /* ── TABS ── */
+    .tabs {
+      display: flex;
+      gap: 0;
+      margin-bottom: 0;
+      border-bottom: 1px solid var(--dim);
+    }
 
-  .manifeste-intro {
-    color: var(--green);
-    font-size: 0.75rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    margin-bottom: 3rem;
-    text-shadow: 0 0 6px var(--green);
-  }
+    .tab-btn {
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--dim);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      padding: 10px 20px 10px 0;
+      cursor: pointer;
+      transition: color .2s, border-color .2s;
+      margin-bottom: -1px;
+      text-shadow: none;
+    }
 
-  section.manifeste-section {
-    margin-bottom: 3.5rem;
-    padding-top: 1rem;
-    border-top: 1px solid #1e1e1e;
-  }
+    .tab-btn::before { content: '▸ '; }
 
-  section.manifeste-section p {
-    margin-bottom: 1.2em;
-    color: var(--fg);
-    text-shadow: 0 0 2px rgba(200, 255, 0, 0.08);
-    max-width: 68ch;
-  }
+    .tab-btn:hover {
+      color: var(--green-dim);
+    }
 
-  section.manifeste-section p:last-child {
-    margin-bottom: 0;
-  }
+    .tab-btn.active {
+      color: var(--green);
+      border-bottom: 2px solid var(--green);
+      text-shadow: 0 0 8px rgba(0,255,65,0.6);
+    }
 
-  .closing-line {
-    color: var(--green);
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    text-shadow: 0 0 8px var(--green);
-    border-left: 2px solid var(--orange);
-    padding-left: 1rem;
-    margin-top: 2rem;
-    font-style: italic;
-  }
+    /* ── PANELS ── */
+    .tab-panel {
+      display: none;
+      padding-top: 40px;
+      animation: fadeIn .3s ease;
+    }
 
-  footer {
-    margin-top: 5rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #1e1e1e;
-    color: var(--dim);
-    font-size: 0.75rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
+    .tab-panel.active {
+      display: block;
+    }
 
-  footer span {
-    color: var(--green);
-    text-shadow: 0 0 4px var(--green);
-  }
+    @keyframes fadeIn {
+      from { opacity:0; transform:translateY(4px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
 
-  p {
-    text-shadow: 0 0 1px rgba(200, 255, 0, 0.06);
-  }
+    /* ── SECTION HEADER ── */
+    .section-header {
+      margin-bottom: 36px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--green-faint);
+    }
 
-  @media (max-width: 500px) {
-    body { padding: 2rem 1rem; }
-    .site-title { font-size: 1.4rem; }
-    footer { flex-direction: column; }
-  }
-</style>
+    .file-label {
+      font-size: 10px;
+      color: var(--dim);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .file-label::before { content: '// fichier : '; }
+
+    .section-title {
+      font-family: 'VT323', monospace;
+      font-size: 34px;
+      letter-spacing: .1em;
+      text-shadow: 0 0 12px rgba(0,255,65,0.5);
+    }
+
+    /* ── CONTENT ── */
+    .content { color: #b8ffcc; }
+    .content p { margin-bottom: 1.2em; }
+
+    .content em {
+      color: var(--dim);
+      font-style: normal;
+      font-size: 11px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      display: block;
+      margin: 2em 0 .8em;
+    }
+
+    .content strong {
+      color: var(--green);
+      text-shadow: 0 0 8px rgba(0,255,65,0.5);
+    }
+
+    /* ── DIRECTIVES ── */
+    .directive-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 1.2em;
+      padding: 12px 16px;
+      border-left: 2px solid var(--green-faint);
+      transition: border-color .2s, background .2s;
+      color: #b8ffcc;
+    }
+    .directive-item:hover { border-color:var(--green-dim); background:var(--green-glow); }
+    .directive-num { color:var(--dim); min-width:20px; flex-shrink:0; }
+
+    /* ── SEGMENTS ── */
+    .segment {
+      margin-bottom: 1.8em;
+      padding: 16px 20px;
+      border: 1px solid var(--green-faint);
+      transition: border-color .2s, background .2s;
+    }
+    .segment:hover { border-color:var(--green-dim); background:var(--green-glow); }
+    .segment-title { font-family:'VT323',monospace; font-size:22px; letter-spacing:.08em; margin-bottom:4px; }
+    .segment-time { color:var(--dim); font-size:10px; letter-spacing:.2em; margin-bottom:10px; }
+    .segment-body { color:#b8ffcc; font-size:14px; line-height:1.7; }
+
+    /* ── AXIOMES ── */
+    .axiom {
+      margin-bottom: 1.4em;
+      padding-left: 20px;
+      border-left: 1px solid var(--dim);
+      color: #b8ffcc;
+      transition: border-color .2s;
+    }
+    .axiom:hover { border-color: var(--green); }
+
+    /* ── CLOSING ── */
+    .closing-line {
+      font-family: 'VT323', monospace;
+      font-size: 28px;
+      text-align: center;
+      margin: 50px 0 16px;
+      text-shadow: 0 0 20px rgba(0,255,65,0.6);
+      letter-spacing: .12em;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px; height: 16px;
+      background: var(--green);
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+      margin-left: 4px;
+      box-shadow: 0 0 6px var(--green);
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── FOOTER ── */
+    .footer {
+      border-top: 1px solid var(--dim);
+      padding-top: 24px;
+      color: var(--dim);
+      font-size: 11px;
+      letter-spacing: .15em;
+      margin-top: 60px;
+    }
+
+    @media(max-width:600px) {
+      .container { padding:30px 18px 60px; }
+      body { font-size:14px; }
+      .tab-btn { padding:8px 12px 8px 0; font-size:10px; }
+    }
+  </style>
 </head>
 <body>
 
-<div class="glitch-overlay-r"></div>
-<div class="glitch-overlay-b"></div>
+  <!-- CRT EFFECTS -->
+  <div class="crt-scanlines"></div>
+  <div class="crt-vignette"></div>
+  <div class="crt-flicker"></div>
+  <div class="glitch-line"></div>
 
-<div class="container">
+  <div class="container">
 
-  <div class="signal">▮ signal actif</div>
+    <!-- HEADER -->
+    <header class="header">
+      <div class="signal-line">transmission active — montréal — abri non répertorié</div>
+      <div class="site-title">MAUVAISE CONTINUITÉ</div>
+      <div class="site-subtitle">un podcast fictif apocalyptique montréalais</div>
+      <div class="progress-bar">
+        <span class="bar-fill"></span><span class="bar-fill"></span><span class="bar-fill"></span><span class="bar-fill"></span><span class="bar-empty"></span>
+        <span class="signal-status">▮ signal actif</span>
+      </div>
+    </header>
 
-  <h1 class="site-title" id="mainTitle">MAUVAISE CONTINUITÉ</h1>
+    <!-- TABS -->
+    <div class="tabs">
+      <button class="tab-btn active" onclick="showTab('manifeste', this)">le manifeste</button>
+      <button class="tab-btn" onclick="showTab('directives', this)">les directives</button>
+      <button class="tab-btn" onclick="showTab('etat', this)">l'état du monde</button>
+    </div>
 
-  <p class="site-subtitle">
-    un podcast fictif apocalyptique montréalais<br>
-    émissions en provenance d'un abri non répertorié — coordonnées inconnues
-  </p>
+    <!-- PANEL: MANIFESTE -->
+    <div class="tab-panel active" id="panel-manifeste">
+      <div class="section-header">
+        <div class="file-label">manifeste_v2.txt — mars 2026</div>
+        <div class="section-title">le manifeste</div>
+      </div>
+      <div class="content">
+        <em>pourquoi</em>
+        <p>le matin on a une réunion Teams pis le soir c'est la fin du monde aux nouvelles</p>
+        <p>j'exagère pas. j'aimerais ça exagérer. le monde ordinaire veut juste cultiver ses tomates pis être tranquille mais y'a une classe de milliardaires qui se textent des videos de torture à partir de leur île du crime pis leur solution à la crise climatique c'est pas d'utiliser leur argent pour faire le bien c'est de se YEET SUR FUCKING MARS</p>
+        <p>on dirait le plan de Dr Evil dans Austin Powers sacrament</p>
+        <p>mauvaise continuité, c'est un podcast pour le monde normal — le monde qui voit les riches essayer de les remplacer avec des robots, qui réalise qu'il a ben plus en commun avec son voisin que de différences, mais que y'a six vieux rentiers qui trouvent ça fucking nice de nous faire croire le contraire ça fait qu'ils achètent le washington post pis twitter pour foutre la marde pis nous vendre des technologies de surveillance</p>
+        <p>c'est un projet pour le monde qui voit qu'on monétise notre colère pour nous faire haïr notre prochain — alors qu'on devrait haïr ceux qui monétisent la colère</p>
+        <p>c'est un podcast pour le monde qui a le goût de cultiver ses tomates dans un jardin, pas dans un bunker</p>
+        <p>c'est un projet d'humour même si c'est difficile en estie de continuer à rire quand les projets immobiliers ont plus de valeur que la vie humaine, pis qu'il y a des ti culs mascus qui se crossent en "optimisant les revenus" de leur 400e porte</p>
+        <em>quoi</em>
+        <p>c'est un podcast fictionnel où on se raconte des histoires comme autour d'un feu de camp — c'est juste que nos monstres portent des suits, détestent l'humanité, pis on les gosse parce qu'on est des NPC dans leur monde à eux</p>
+        <p>c'est important la fiction. quand la réalité repousse constamment les limites de l'indicible, on se tourne vers elle pour répondre à une question universelle: <strong>what the actual fuck</strong></p>
+        <p>pis s'ils continuent à nous mettre des bâtons dans les roues, on s'organise — pas pour leur parler à eux, ils s'en calissent — on va se parler entre nous</p>
+        <p>on va construire un lore qui est en fait juste un miroir qui reflète le grotesque qui nous entoure. je vous mets au défi de trouver une hyperbole qui sonne pas comme un grand titre de journal</p>
+        <p>c'est un podcast en forme de drapeau rouge — ancré dans le rire pis la fête. on est pas cyniques, on est pas nihilistes. c'est juste qu'à un moment donné vaut mieux en rire</p>
+        <p>ça t'intéresse?</p>
+        <p>il y a deux rôles. les chroniqueurs de l'horreur et les observateurs du chaos. les premiers viennent raconter les trucs les plus débiles avec le ton d'un chroniqueur de sucré salé qui porte un masque à gaz. les seconds sont là pour le show — dessiner, tenir une caméra, viber. c'est la galerie des monstres</p>
+        <p>le background c'est montréal — notre village gaulois cosmopolite où rien fonctionne mais tout le monde cheers à la sangria quand un pauvre quidam perd ses caps de roue dans un nid de poule</p>
+        <em>comment</em>
+        <p>une fois de temps en temps, on se rencontre entre déviants pis on enregistre. on laisse nos egos dehors, nos cellulaires dans une boîte, pis on crée quelque chose en gang</p>
+        <p>dans notre bunker, t'es quelqu'un d'autre. un masque, une moustache, une poubelle avec des googly eyes — ton costume on s'en fout, mais pour inventer notre lore faut commencer par se réinventer soi-même</p>
+        <p>on fait des chroniques, des pubs, des chansons, des billets. le diable a pas besoin d'avocat</p>
+        <p>on fait un carnaval, une fête des fous. c'est brouillon. quelques micros, quelques néons. one take, pas de montage — on les entendra les chaises qui grincent, les rires qui fusent, les bafouillages. l'erreur est humaine, pis aujourd'hui plus que jamais c'est fucking important d'être humain</p>
+        <p>notre matériel c'est la réalité: trash, indicible, horrible, parfois belle, parfois drôle, souvent unfair. on prend le réel pis on le twist juste assez — on sait plus où mettre les poubelles à montréal, pas de problème, on va vider le saint-laurent, le mettre dans un aquarium coin parc-jean-talon pis crisser nos ordures directement dans les fonds marins à sec</p>
+        <p>on a pas beaucoup de règles, mais on en a quelques unes dont on déroge jamais: on punch up, jamais down. ce sont les systèmes qu'on tourne en ridicule, jamais le monde qui est pogné dedans. ceux qui exploitent et qui profitent, c'est eux qu'on pointe du doigt. pis à leurs sbires qui pensent qu'en leur léchant le cul ils vont se sécuriser une place dans la fusée — on leur rappelle qu'ils sont des NPC eux aussi</p>
+        <p>on est baveux, pas méchants. notre bienveillance c'est une technique de survie</p>
+        <p>pis c'est pour ça qu'on va toujours enregistrer devant public — devant la galerie des monstres, nos amis et nos familles, déguisés eux aussi. c'est la fête, c'est mardi gras, c'est la fin du monde et nous on a décidé de faire le party</p>
+        <p>dans le fond c'est juste un cri du coeur parce qu'on aimerait ça s'éviter de tomber</p>
+        <p><strong>dans la mauvaise continuité</strong></p>
+      </div>
+    </div>
 
-  <p class="manifeste-intro">// fichier : manifeste_v1.txt — dernière modification inconnue</p>
+    <!-- PANEL: DIRECTIVES -->
+    <div class="tab-panel" id="panel-directives">
+      <div class="section-header">
+        <div class="file-label">directives_operateur.txt</div>
+        <div class="section-title">les directives de l'opérateur</div>
+      </div>
+      <div class="content">
+        <p>ok, c'est cool et poétique tout ça, mais comment ça marche concrètement?</p>
+        <div class="directive-item"><span class="directive-num">1.</span><span>c'est toujours un one take</span></div>
+        <div class="directive-item"><span class="directive-num">2.</span><span>c'est toujours 20 minutes. après 22 on a un avertissement. après 25 le signal coupe</span></div>
+        <div class="directive-item"><span class="directive-num">3.</span><span>c'est une formule. ça prend des lignes si tu veux colorier à l'extérieur</span></div>
+        <div class="directive-item"><span class="directive-num">4.</span><span>la DA c'est de la radio dans un bunker. c'est lofi, chaotique, entre le studio de production et le chantier de construction</span></div>
+        <div class="directive-item"><span class="directive-num">5.</span><span>on a un public. il rit, il réagit, il écoute, il dessine, il tricote, il danse. il est là. c'est pour lui qu'on est là, même s'il est tout seul</span></div>
+        <br>
+        <div class="segment">
+          <div class="segment-title">l'appel</div>
+          <div class="segment-time">// minute 0 à minute 2</div>
+          <div class="segment-body">on dit bonjour, on présente les invités, on prend des nouvelles</div>
+        </div>
+        <div class="segment">
+          <div class="segment-title">les nouvelles du dehors</div>
+          <div class="segment-time">// minute 2 à minute 6</div>
+          <div class="segment-body">tout le monde arrive avec sa nouvelle, sa pièce du lore, du worldbuilding. on partage, on en parle, on débat, on improvise, on passe à autre chose</div>
+        </div>
+        <div class="segment">
+          <div class="segment-title">le coeur du bunker</div>
+          <div class="segment-time">// minute 6 à minute 12</div>
+          <div class="segment-body">ici on demande à quelqu'un de mener le bal. c'est la chronique, la chanson, le rap, le poème, le numéro d'humour, les trucs pour cuisiner ses pigeons sans s'empoisonner. le moment principal du worldbuilding — on écoute, on interagit, on construit</div>
+        </div>
+        <div class="segment">
+          <div class="segment-title">la pub</div>
+          <div class="segment-time">// l'opérateur décidera</div>
+          <div class="segment-body">la fin du monde sera commanditée. on invente ensemble les horreurs qu'on va essayer de nous enfoncer dans le zeitgeist du futur. live ou pré-enregistrées</div>
+        </div>
+        <div class="segment">
+          <div class="segment-title">hot seat + signal coupé</div>
+          <div class="segment-time">// minute 14 à 20 — 22 — 25</div>
+          <div class="segment-body">c'est modulable, c'est accordéon. on reçoit un invité du vrai monde ou du faux — une entrevue, une discussion, une conversation. on parle d'un livre, d'un concept, d'un engagement communautaire, d'une cause, d'un phénomène. ils arrivent dans un écran de fumée et repartent quand le signal coupe.<br><br>c'est le dernier bloc. on fait pas de outro. le signal s'éteint. on se reverra plus tard.</div>
+        </div>
+      </div>
+    </div>
 
-  <section class="manifeste-section">
-    <h2 class="section-title">le pourquoi</h2>
-    <p>le matin on a une réunion Teams pis le soir c'est la fin du monde aux nouvelles</p>
-    <p>j'exagère pas. j'aimerais ça exagérer. le monde ordinaire veut juste cultiver ses tomates pis être tranquille mais y'a une classe de milliardaires qui se textent des videos de torture à partir de leur île du crime pis leur solution à la crise climatique c'est pas d'utiliser leur argent pour faire le bien c'est de se YEET SUR FUCKING MARS</p>
-    <p>on dirait le plan de Dr Evil dans Austin Powers sacrament</p>
-    <p>mauvaise continuité, c'est un podcast pour le monde normal, le monde qui voit les riches essayer de les remplacer avec des robots parce qu'on coute trop cher, le monde qui réalise qu'ils ont ben plus en commun avec leur voisin que de différences, mais que y'a six vieux rentiers qui trouvent ça fucking nice de nous faire croire le contraire ça fait qu'ils achètent le washington post pis twitter pour foutre la marde pis nous vendre des technologies de surveillance</p>
-    <p>un projet pour le monde qui catch qu'on monétise notre colère en faisant qu'on haïsse notre prochain alors qu'on devrait haïr ceux qui monétisent la colère</p>
-    <p>c'est un podcast pour le monde qui a le goût de cultiver leur tomates dans un jardin, pas dans un bunker</p>
-    <p>c'est un projet d'humour même si c'est difficile en estie de continuer à rire quand les projets immobiliers ont plus de valeur que la vie humaine, pis qu'il y a des ti culs mascus qui se crossent en "optimisant les revenus" de leur 400e porte</p>
-    <p>c'est un projet en forme de sonnette d'alarme parce que c'est déjà en train de déraper pis faut qu'on commence à penser à désescalader</p>
-  </section>
+    <!-- PANEL: ÉTAT DU MONDE -->
+    <div class="tab-panel" id="panel-etat">
+      <div class="section-header">
+        <div class="file-label">etat_du_monde_fiction.txt</div>
+        <div class="section-title">l'état du monde fiction</div>
+      </div>
+      <div class="content">
+        <p>mauvaise continuité c'est un monde fiction, une caricature, mais qui demande une cohésion.</p>
+        <p>pas des règles, juste une vision, un système, pour que nos histoires se croisent et se rejoignent, que nos fréquences s'alignent sur la même longueur d'onde</p>
+        <p>des axiomes, en gros. c'est un beau mot, vous irez googler la définition.</p>
+        <br>
+        <div class="axiom"><p>dans mauvaise continuité, le pire est déjà arrivé. on anticipe pas l'apocalypse, on documente celle qui est en cours en espérant que nos patrons approuvent notre demande de vacances pour célébrer l'armageddon</p></div>
+        <div class="axiom"><p>nos monstres portent des vestons et des talons hauts. l'essence de l'humanité est mise à mal par des gens d'affaire avec des comptes twitter vérifiés</p></div>
+        <div class="axiom"><p>le mal et la méchanceté c'est pas un concept abstrait, c'est une business à financer</p></div>
+        <div class="axiom"><p>montréal c'est le centre de notre fiction. si tu veux parler d'ailleurs, passe par Hochelaga, ça te fera moins long. toutes nos histoires commencent et finissent ici</p></div>
+        <div class="axiom"><p>dans mauvaise continuité, nos gouvernements s'assurent que les plus grosses crises arrivent pendant les jours fériés — faudrait pas impacter la productivité</p></div>
+        <div class="axiom"><p>on a tous encore un REER. on sait juste plus ça sert à quoi. la retraite relève de la foi, y'a des cultes qui s'organisent pour l'invoquer comme une vieille divinité</p></div>
+        <div class="axiom"><p>ici internet est mort, c'est des robots, des trolls russes pis des IA malveillantes. tout le monde le sait, mais ta mère a encore cliqué sur un mauvais lien</p></div>
+        <div class="axiom"><p>la gentrification a rendu l'eau potable trop chère, ça fait qu'on boit du Perrier de contrebande dans des ruelles. on appelle ça "s'hydrater avec dignité"</p></div>
+        <div class="axiom"><p>les pigeons de Montréal songent à se syndiquer</p></div>
+        <div class="axiom"><p>la mairie de Montréal c'est rendu trois VUS dans un gros manteau avec une pancarte "fuck les vélos"</p></div>
+        <div class="axiom"><p>on a réglé le problème des classes de maternelles frigorifiées en construisant les nouvelles écoles au sous-sol des centres de données. ça fait moins long aux enfants pour parler avec leur enseignant artificiel</p></div>
+        <div class="axiom"><p>il reste encore quelques enseignants humains dans les égouts. ils enseignent l'histoire des cônes oranges et l'art perdu d'écrire en lettres attachées</p></div>
+        <br>
+        <p><strong>c'est un monde fiction en attendant que le réel le rejoigne.</strong></p>
+      </div>
+    </div>
 
-  <section class="manifeste-section">
-    <h2 class="section-title">quoi</h2>
-    <p>c'est un podcast fictionnel où on se raconte des histoires comme autour d'un feu de camp, c'est juste que nos monstres ils ont pas des machetes pis des masques de hockey; ils portent des suits, détestent l'humanité pis on les gosse parce qu'on est des NPC dans leur monde à eux</p>
-    <p>c'est important la fiction. quand la réalité repousse constamment les limites de l'indicible pis que les dirigeants se fendent en quatre pour inventer de nouvelles atrocités, on se tourne vers la fiction pour répondre à une question universelle: what the actual fuck</p>
-    <p>on a tous un point en commun, on veut être tranquille, on veut profiter de la vie, et là-dedans, on devrait toujours se supporter</p>
-    <p>pis s'ils continuent à nous mettre des bâtons dans les rues, on va s'organiser; pas pour leur parler à eux — ils s'en calissent — on va se parler entre nous</p>
-    <p>on va construire un lore qui est en fait juste un miroir qui reflète le grotesque qui nous entoure, peut-être qu'on va monter le volume à 120%, mais je vous mets au défi de trouver une hyperbole qui sonne pas comme un grand titre de journal;</p>
-    <p>notre univers va être fictionnel; mais les horreurs demeurent réelles; notre projet c'est de cosplay l'apocalypse</p>
-    <p>c'est un podcast en forme de drapeau rouge. mais ancré dans le rire pis la fête, on est pas cyniques, on est pas nihilistes. c'est juste qu'à un moment donné vaut mieux en rire sinon on va tous se gunner c'est impossible</p>
-    <p>ça t'intéresse?</p>
-    <p>il y a deux rôles à jouer. les chroniqueurs de l'horreur et les observateurs du chaos. les premiers viennent raconter les trucs les plus débiles avec le ton d'un chroniqueur de sucré salé qui porte un masque à gaz, ils viennent chanter de l'engagé sur le mush pis débattre sur un ton conspi. les seconds sont là pour le show, pour dessiner, tenir une camera, pour viber, c'est la galerie des monstres</p>
-    <p>le background c'est montreal; toutes les histoires passent par ici, notre village gaulois cosmopolite où rien fonctionne mais tout le monde cheers à la sangria quand un pauvre quidam perd ses caps de roue dans un nid de poule</p>
-    <p>montreal c'est notre microcosme pour parler des horreurs universelles. on garde ça petit pour mieux parler du gros</p>
-  </section>
+    <div class="closing-line">dans la mauvaise continuité<span class="cursor"></span></div>
 
-  <section class="manifeste-section">
-    <h2 class="section-title">le comment</h2>
-    <p>une fois de temps en temps, on se rencontre entre déviants pis on enregistre. on laisse nos egos dehors, nos cellulaires dans une boîte pis on créé quelque chose en gang</p>
-    <p>dans notre bunker, t'es quelqu'un d'autre; un masque ou une moustache ou une perruque ou une poubelle avec des googly eyes, ton costume on s'en fout mais pour inventer notre lore, faut commencer par se réinventer soi-même, pis demain tu seras quelqu'un de complètement nouveau</p>
-    <p>on fait des chroniques, des publicités, des chansons, des billets avec un biais pour les opprimés et les victimes. le diable a pas besoin d'avocat, pis nous on a pas besoin d'avocat du diable</p>
-    <p>on fait un carnaval, une fête des fous. c'est brouillon. quelques micros, quelques neons pour l'ambiance. one take, pas de montage, on les entendra les chaises qui grincent, les rires qui fusent, les bafouillages à en plus finir. l'erreur est humaine, pis aujourd'hui plus que jamais c'est fucking important d'être humain.</p>
-    <p>notre matériel c'est la réalité: trash, indicible, horrible, parfois belle, parfois drôle, souvent unfair, pis qui nous surprend jamais de la bonne manière. mais si on voulait voir la réalité crue on écouterait les nouvelles. nous on passe par la fiction pour mieux se regarder dans le miroir.</p>
-    <p>on prend le réel pis on le twist juste assez; on sait plus où mettre les poubelles à montréal, pas de problème, on va vider le saint-laurent, le mettre dans un aquarium coin parc-jean talon (pour les nostalgiques) pis on va se sauver une étape pis crisser nos ordures directement dans les fonds marins à sec</p>
-    <p>on peut pas être tout tout le temps pour tout le monde; y'en a qui diront qu'on est puérils, y'en a qui diront qu'on est insignifiants. tant pis. notre démarche est sérieuse, même si nous on l'est pas. le but c'est pas de changer le monde, le but c'est de se changer entre nous.</p>
-    <p>c'est pour ça qu'on a pas beaucoup de regles, mais on en a quelques unes dont on deroge jamais: on punch up, jamais down; ce sont les systemes qu'on tourne en ridicule, jamais le monde qui est pogné dedans; c'est ceux qui exploitent et qui profitent qu'on pointe du doigt; pis à leur sbire qui pensent qu'en leur léchant le cul ils vont se sécuriser une place dans la fusée vers le paradis, nous on leur rappelle qu'ils sont des NPC eux avec</p>
-    <p>on est baveux, pas méchants, notre bienveillance c'est une technique de survie</p>
-    <p>pis c'est pour ça qu'on va toujours enregistrer devant public, devant la galerie des monstres, nos amis et nos familles, déguisés eux aussi. c'est la fête, c'est mardi gras, c'est la fin du monde et nous on a décidé de faire le party</p>
-    <p class="closing-line">
-      dans le fond c'est juste un cri du coeur parce qu'on aimerait ça s'éviter de tomber<br><br>
-      dans la mauvaise continuité
-    </p>
-  </section>
+    <footer class="footer">
+      <div>mauvaise continuité — montréal —</div>
+      <div style="margin-top:6px;">transmission chiffrée — ▮▮▮▯▯ signal</div>
+    </footer>
 
-</div>
+  </div>
 
-<footer>
-  <div>mauvaise continuité &mdash; <span>montréal</span> &mdash; <span id="year"></span></div>
-  <div>transmission chiffrée &mdash; <span>▮▮▮▯▯</span> signal</div>
-</footer>
+  <script>
+    function showTab(id, btn) {
+      // hide all panels
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      // show target
+      document.getElementById('panel-' + id).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
 
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  const title = document.getElementById('mainTitle');
-  setTimeout(() => {
-    title.classList.add('title-glitch');
-    setTimeout(() => title.classList.remove('title-glitch'), 700);
-  }, 300);
-
-  function scheduleGlitch() {
-    const delay = 8000 + Math.random() * 7000;
-    setTimeout(() => {
-      document.body.classList.add('glitch-active');
-      setTimeout(() => {
-        document.body.classList.remove('glitch-active');
-        scheduleGlitch();
-      }, 300);
-    }, delay);
-  }
-  scheduleGlitch();
-</script>
 </body>
 </html>
