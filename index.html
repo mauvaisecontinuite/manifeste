@@ -329,159 +329,347 @@
 </head>
 <body>
 
-  <!-- CRT EFFECTS -->
-  <div class="crt-scanlines"></div>
-  <div class="crt-vignette"></div>
-  <div class="crt-flicker"></div>
-  <div class="glitch-line"></div>
+  
+        <div id="container"><div id="header"></div>
+            <div id="headerArea">
+                
+                <nav id="navbar" style="margin-bottom: 10px;">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                        <li><a href="#">Link</a></li>
+                    </ul>
+                </nav>
+            </div>
 
-  <div class="container">
+            <div id="flex">
+                <aside id="leftSidebar" style="margin-right: 10px;">
+                    <h2>Updates</h2>
+                    <div class="box">
+                        <p>I have recently updated this tool as of August 2022!</p>
+                        <ul style="padding-left:10px;">
+                            <li>Rewrote the JS to generate cleaner code</li>
+                            <li>Rewrote the CSS in a way that hopefully makes much more sense to edit</li>
+                            <li>Added a couple of new features!</li>
+                            <li>Old version is still available <a href="old.html" target="_blank">here</a></li>
+                        </ul>
+                    </div>
+                    <h2>Hi there!</h2>
+                    <h3>Other Tools</h3>
+                    <ul>
+                        <li><a href="https://sadgrlonline.github.io/html-cheatsheet/" target="_blank">HTML Cheatsheet</a>
+                        </li><li><a href="webmastery/webmaster-links.html" target="_blank">Webmaster Links</a></li>
+                        <li><a href="webmastery/downloads/tiledbgs.html" target="_blank">Tiled BGs</a></li>
+                        <li><a href="webmastery/downloads/fonts.html" target="_blank">Fonts</a></li>
+                        <li><a href="projects/ideas/" target="_blank">Site Ideas</a></li>
+                    </ul>
+                </aside>
+                <main>
+                    <h1>Welcome to my Layout Maker!</h1>
+                    <p><strong>Please read this first!</strong></p>
+                    <p>This tool generates a layout that is responsive, which means it looks great on phones! Use dropdowns above to customize your layout's general features. Click the button to generate your HTML and CSS, and paste it into a file on Neocities.</p>
+                    <p>Then you can replace all of the text with your own. For more customization, the CSS code has comments to explain what each part changes. Please read through the code - even if you have no idea what it means.</p>
+                    <p>If you're feeling up for a challenge, I put together <a href="learn/understanding-tweaking-my-layout-maker/" target="_blank">a guide</a> which goes over the structure of how this layout is built, along with some specific tips on how to edit it in certain ways.</p>
+                    <p>Check the links in the sidebar for more resources to build your own website!</p>
 
-    <!-- HEADER -->
-    <header class="header">
-      <div class="signal-line">transmission active — montréal — abri non répertorié</div>
-      <div class="site-title">MAUVAISE CONTINUITÉ</div>
-      <div class="site-subtitle">un podcast fictif apocalyptique montréalais</div>
-      <div class="progress-bar">
-        <span class="bar-fill"></span><span class="bar-fill"></span><span class="bar-fill"></span><span class="bar-fill"></span><span class="bar-empty"></span>
-        <span class="signal-status">▮ signal actif</span>
-      </div>
-    </header>
+                    <p> - Cat Ipsum - </p>
+                    <p>Rub my belly hiss swipe at owner's legs sniff catnip and act crazy growl at dogs in my sleep sit on the laptop for hiss at vacuum cleaner i like to spend my days sleeping and eating fishes that my human fished for me.</p>
 
-    <!-- TABS -->
-    <div class="tabs">
-      <button class="tab-btn active" onclick="showTab('manifeste', this)">le manifeste</button>
-      <button class="tab-btn" onclick="showTab('directives', this)">les directives</button>
-      <button class="tab-btn" onclick="showTab('etat', this)">l'état du monde</button>
-    </div>
+                    <p>Head nudges eat my own ears. Hey! you there, with the hands why can't i catch that stupid red dot, shed everywhere shed everywhere stretching attack your ankles chase the red dot, hairball run catnip eat the grass sniff, or roll over and sun my belly curl up and sleep on the freshly laundered towels.</p>
 
-    <!-- PANEL: MANIFESTE -->
-    <div class="tab-panel active" id="panel-manifeste">
-      <div class="section-header">
-        <div class="file-label">manifeste_v2.txt — mars 2026</div>
-        <div class="section-title">le manifeste</div>
-      </div>
-      <div class="content">
-        <em>pourquoi</em>
-        <p>le matin on a une réunion Teams pis le soir c'est la fin du monde aux nouvelles</p>
-        <p>j'exagère pas. j'aimerais ça exagérer. le monde ordinaire veut juste cultiver ses tomates pis être tranquille mais y'a une classe de milliardaires qui se textent des videos de torture à partir de leur île du crime pis leur solution à la crise climatique c'est pas d'utiliser leur argent pour faire le bien c'est de se YEET SUR FUCKING MARS</p>
-        <p>on dirait le plan de Dr Evil dans Austin Powers sacrament</p>
-        <p>mauvaise continuité, c'est un podcast pour le monde normal, le monde qui voit les riches essayer de les remplacer avec des robots, qui réalise qu'il a ben plus en commun avec son voisin que de différences, mais que y'a six vieux rentiers qui trouvent ça fucking nice de nous faire croire le contraire ça fait qu'ils achètent le washington post pis twitter pour foutre la marde pis nous vendre des technologies de surveillance</p>
-        <p>c'est un projet pour le monde qui voit qu'on monétise notre colère pour nous faire haïr notre prochain, alors qu'on devrait haïr ceux qui monétisent la colère</p>
-        <p>c'est un podcast pour le monde qui a le goût de cultiver ses tomates dans un jardin, pas dans un bunker</p>
-        <p>c'est un projet d'humour même si c'est difficile en estie de continuer à rire quand les projets immobiliers ont plus de valeur que la vie humaine, pis qu'il y a des ti culs mascus qui se crossent en "optimisant les revenus" de leur 400e porte</p>
-        <em>quoi</em>
-        <p>c'est un podcast fictionnel où on se raconte des histoires comme autour d'un feu de camp. c'est juste que nos monstres portent des suits, détestent l'humanité, pis on les gosse parce qu'on est des NPC dans leur monde à eux</p>
-        <p>c'est important la fiction. quand la réalité repousse constamment les limites de l'indicible, on se tourne vers elle pour répondre à une question universelle: <strong>what the actual fuck</strong></p>
-        <p>pis s'ils continuent à nous mettre des bâtons dans les roues, on s'organise, pas pour leur parler à eux, ils s'en calissent, on va se parler entre nous</p>
-        <p>on va construire un lore qui est en fait juste un miroir qui reflète le grotesque qui nous entoure. je vous mets au défi de trouver une hyperbole qui sonne pas comme un grand titre de journal</p>
-        <p>c'est un podcast en forme de drapeau rouge, ancré dans le rire pis la fête. on est pas cyniques, on est pas nihilistes. c'est juste qu'à un moment donné vaut mieux en rire</p>
-        <p>ça t'intéresse?</p>
-        <p>il y a deux rôles. les chroniqueurs de l'horreur et les observateurs du chaos. les premiers viennent raconter les trucs les plus débiles avec le ton d'un chroniqueur de sucré salé qui porte un masque à gaz. les seconds sont là pour le show — dessiner, tenir une caméra, viber. c'est la galerie des monstres</p>
-        <p>le background c'est montréal, notre village gaulois cosmopolite où rien fonctionne mais tout le monde cheers à la sangria quand un pauvre quidam perd ses caps de roue dans un nid de poule</p>
-        <em>comment</em>
-        <p>une fois de temps en temps, on se rencontre entre déviants pis on enregistre. on laisse nos egos dehors, nos cellulaires dans une boîte, pis on crée quelque chose en gang</p>
-        <p>dans notre bunker, t'es quelqu'un d'autre. un masque, une moustache, une poubelle avec des googly eyes, ton costume on s'en fout, mais pour inventer notre lore faut commencer par se réinventer soi-même</p>
-        <p>on fait des chroniques, des pubs, des chansons, des billets.</p>
-        <p>on fait un carnaval, une fête des fous. c'est brouillon. quelques micros, quelques néons. one take, pas de montage. on les entendra les chaises qui grincent, les rires qui fusent, les bafouillages. l'erreur est humaine, pis aujourd'hui plus que jamais c'est fucking important d'être humain</p>
-        <p>notre matériel c'est la réalité: trash, indicible, horrible, parfois belle, parfois drôle, souvent unfair. on prend le réel pis on le twist juste assez; on sait plus où mettre les poubelles à montréal, pas de problème, on va vider le saint-laurent, le mettre dans un aquarium coin parc-jean-talon pis crisser nos ordures directement dans les fonds marins à sec</p>
-        <p>on a pas beaucoup de règles, mais on en a quelques unes dont on déroge jamais: on punch up, jamais down. ce sont les systèmes qu'on tourne en ridicule, jamais le monde qui est pogné dedans. ceux qui exploitent et qui profitent, c'est eux qu'on pointe du doigt. pis à leurs sbires qui pensent qu'en leur léchant le cul ils vont se sécuriser une place dans la fusée — on leur rappelle qu'ils sont des NPC eux aussi</p>
-        <p>on est baveux, pas méchants. notre bienveillance c'est une technique de survie</p>
-        <p>pis c'est pour ça qu'on va toujours enregistrer devant public, devant la galerie des monstres, nos amis et nos familles, déguisés eux aussi. c'est la fête, c'est mardi gras, c'est la fin du monde et nous on a décidé de faire le party</p>
-        <p>dans le fond c'est juste un cri du coeur parce qu'on aimerait ça s'éviter de tomber</p>
-        <p><strong>dans la mauvaise continuité</strong></p>
-      </div>
-    </div>
 
-    <!-- PANEL: DIRECTIVES -->
-    <div class="tab-panel" id="panel-directives">
-      <div class="section-header">
-        <div class="file-label">directives_operateur.txt</div>
-        <div class="section-title">les directives de l'opérateur</div>
-      </div>
-      <div class="content">
-        <p>ok, c'est cool et poétique tout ça, mais comment ça marche concrètement?</p>
-        <div class="directive-item"><span class="directive-num">1.</span><span>c'est toujours un one take</span></div>
-        <div class="directive-item"><span class="directive-num">2.</span><span>c'est toujours 20 minutes. après 22 on a un avertissement. après 25 le signal coupe</span></div>
-        <div class="directive-item"><span class="directive-num">3.</span><span>c'est une formule. ça prend des lignes si tu veux colorier à l'extérieur</span></div>
-        <div class="directive-item"><span class="directive-num">4.</span><span>la DA c'est de la radio dans un bunker. c'est lofi, chaotique, entre le studio de production et le chantier de construction</span></div>
-        <div class="directive-item"><span class="directive-num">5.</span><span>on a un public. il rit, il réagit, il écoute, il dessine, il tricote, il danse. il est là. c'est pour lui qu'on est là, même s'il est tout seul</span></div>
-        <br>
-        <div class="segment">
-          <div class="segment-title">l'appel</div>
-          <div class="segment-time">// minute 0 à minute 2</div>
-          <div class="segment-body">on dit bonjour, on présente les invités, on prend des nouvelles</div>
+                </main>
+                <aside id="rightSidebar" style="margin-left: 10px;">
+                    <h2>Updates</h2>
+                    <div class="box">
+                        <p>I have recently updated this tool as of August 2022!</p>
+                        <ul style="padding-left:10px;">
+                            <li>Rewrote the JS to generate cleaner code</li>
+                            <li>Rewrote the CSS in a way that hopefully makes much more sense to edit</li>
+                            <li>Added a couple of new features!</li>
+                            <li>Old version is still available <a href="old.html" target="_blank">here</a></li>
+                        </ul>
+                    </div>
+                    <h2>Hi there!</h2>
+                    <h3>Other Tools</h3>
+                    <ul>
+                        <li><a href="https://sadgrlonline.github.io/html-cheatsheet/" target="_blank">HTML Cheatsheet</a>
+                        </li><li><a href="webmastery/webmaster-links.html" target="_blank">Webmaster Links</a></li>
+                        <li><a href="webmastery/downloads/tiledbgs.html" target="_blank">Tiled BGs</a></li>
+                        <li><a href="webmastery/downloads/fonts.html" target="_blank">Fonts</a></li>
+                        <li><a href="projects/ideas/" target="_blank">Site Ideas</a></li>
+
+                    </ul>
+                </aside>
+            </div>
+            <footer id="footer" style="margin-top: 10px;">CC0 Public Domain, 2022</footer>
         </div>
-        <div class="segment">
-          <div class="segment-title">les nouvelles du dehors</div>
-          <div class="segment-time">// minute 2 à minute 6</div>
-          <div class="segment-body">tout le monde arrive avec sa nouvelle, sa pièce du lore, du worldbuilding. on partage, on en parle, on débat, on improvise, on passe à autre chose</div>
-        </div>
-        <div class="segment">
-          <div class="segment-title">le coeur du bunker</div>
-          <div class="segment-time">// minute 6 à minute 12</div>
-          <div class="segment-body">ici on demande à quelqu'un de mener le bal. c'est la chronique, la chanson, le rap, le poème, le numéro d'humour, les trucs pour cuisiner ses pigeons sans s'empoisonner. le moment principal du worldbuilding — on écoute, on interagit, on construit</div>
-        </div>
-        <div class="segment">
-          <div class="segment-title">la pub</div>
-          <div class="segment-time">// l'opérateur décidera</div>
-          <div class="segment-body">la fin du monde sera commanditée. on invente ensemble les horreurs qu'on va essayer de nous enfoncer dans le zeitgeist du futur. live ou pré-enregistrées</div>
-        </div>
-        <div class="segment">
-          <div class="segment-title">hot seat + signal coupé</div>
-          <div class="segment-time">// minute 14 à 20 — 22 — 25</div>
-          <div class="segment-body">c'est modulable, c'est accordéon. on reçoit un invité du vrai monde ou du faux — une entrevue, une discussion, une conversation. on parle d'un livre, d'un concept, d'un engagement communautaire, d'une cause, d'un phénomène. ils arrivent dans un écran de fumée et repartent quand le signal coupe.<br><br>c'est le dernier bloc. on fait pas de outro. le signal s'éteint. on se reverra plus tard.</div>
-        </div>
-      </div>
-    </div>
+        <!-- THIS IS THE CSS !-->
+        <style>
+            /* user styles */
 
-    <!-- PANEL: ÉTAT DU MONDE -->
-    <div class="tab-panel" id="panel-etat">
-      <div class="section-header">
-        <div class="file-label">etat_du_monde_fiction.txt</div>
-        <div class="section-title">l'état du monde fiction</div>
-      </div>
-      <div class="content">
-        <p>mauvaise continuité c'est un monde fiction, une caricature, mais qui demande une cohésion.</p>
-        <p>pas des règles, juste une vision, un système, pour que nos histoires se croisent et se rejoignent, que nos fréquences s'alignent sur la même longueur d'onde</p>
-        <p>des axiomes, en gros. c'est un beau mot, vous irez googler la définition.</p>
-        <br>
-        <div class="axiom"><p>dans mauvaise continuité, le pire est déjà arrivé. on anticipe pas l'apocalypse, on documente celle qui est en cours en espérant que nos patrons approuvent notre demande de vacances pour célébrer l'armageddon</p></div>
-        <div class="axiom"><p>nos monstres portent des vestons et des talons hauts. l'essence de l'humanité est mise à mal par des gens d'affaire avec des comptes twitter vérifiés</p></div>
-        <div class="axiom"><p>le mal et la méchanceté c'est pas un concept abstrait, c'est une business à financer</p></div>
-        <div class="axiom"><p>montréal c'est le centre de notre fiction. si tu veux parler d'ailleurs, passe par Hochelaga, ça te fera moins long. toutes nos histoires commencent et finissent ici</p></div>
-        <div class="axiom"><p>dans mauvaise continuité, nos gouvernements s'assurent que les plus grosses crises arrivent pendant les jours fériés — faudrait pas impacter la productivité</p></div>
-        <div class="axiom"><p>on a tous encore un REER. on sait juste plus ça sert à quoi. la retraite relève de la foi, y'a des cultes qui s'organisent pour l'invoquer comme une vieille divinité</p></div>
-        <div class="axiom"><p>ici internet est mort, c'est des robots, des trolls russes pis des IA malveillantes. tout le monde le sait, mais ta mère a encore cliqué sur un mauvais lien</p></div>
-        <div class="axiom"><p>la gentrification a rendu l'eau potable trop chère, ça fait qu'on boit du Perrier de contrebande dans des ruelles. on appelle ça "s'hydrater avec dignité"</p></div>
-        <div class="axiom"><p>les pigeons de Montréal songent à se syndiquer. les nuages ont des lobbyistes.</p></div>
-        <div class="axiom"><p>la mairie de Montréal c'est rendu trois VUS dans un gros manteau avec une pancarte "fuck les vélos"</p></div>
-        <div class="axiom"><p>on a réglé le problème des classes de maternelles frigorifiées en construisant les nouvelles écoles au sous-sol des centres de données. ça fait moins long aux enfants pour parler avec leur enseignant artificiel</p></div>
-        <div class="axiom"><p>il reste encore quelques enseignants humains dans les égouts. ils enseignent l'histoire des cônes oranges et l'art perdu d'écrire en lettres attachées</p></div>
-        <br>
-        <p><strong>c'est un monde fiction en attendant que le réel le rejoigne.</strong></p>
-      </div>
-    </div>
+            /* styles are what change the color and sizes of stuff on your site. */
 
-    <div class="closing-line">dans la mauvaise continuité<span class="cursor"></span></div>
+            /* these are variables that are being used in the code
+    these tended to confuse some people, so I only kept 
+    the images as variables */
 
-    <footer class="footer">
-      <div>mauvaise continuité — montréal —</div>
-      <div style="margin-top:6px;">transmission chiffrée — ▮▮▮▯▯ signal</div>
-    </footer>
+            :root {
+                --header-image: url('https://sadhost.neocities.org/images/layouts/wp.jpeg');
+                --body-bg-image: url('https://sadhost.neocities.org/images/tiles/purplesky.gif');
 
-  </div>
+                /* colors */
+                --content: #43256E;
+            }
 
-  <script>
-    function showTab(id, btn) {
-      // hide all panels
-      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-      // show target
-      document.getElementById('panel-' + id).classList.add('active');
-      btn.classList.add('active');
-    }
-  </script>
+            /* if you have the URL of a font, you can set it below */
+            /* feel free to delete this if it's not your vibe */
 
-</body>
+            /* this seems like a lot for just one font and I would have to agree 
+    but I wanted to include an example of how to include a custom font.
+    If you download a font file you can upload it onto your Neocities
+    and then link it! Many fonts have separate files for each style
+    (bold, italic, etc. T_T) which is why there are so many!
+    
+    */
+
+            @font-face {
+                font-family: Nunito;
+                src: url('https://sadhost.neocities.org/fonts/Nunito-Regular.ttf');
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('https://sadhost.neocities.org/fonts/Nunito-Bold.ttf');
+                font-weight: bold;
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('https://sadhost.neocities.org/fonts/Nunito-Italic.ttf');
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: Nunito;
+                src: url('https://sadhost.neocities.org/fonts/Nunito-BoldItalic.ttf');
+                font-style: italic;
+                font-weight: bold;
+            }
+
+            body {
+                font-family: 'Nunito', sans-serif;
+                margin: 0;
+                background-color: #08031A;
+                /* you can delete the line below if you'd prefer to not use an image */
+                background-size: 65px;
+                color: #fceaff;
+                background-image: var(--body-bg-image);
+            }
+
+            * {
+                box-sizing: border-box;
+            }
+
+            /* below this line is CSS for the layout */
+
+            /* this is a CSS comment
+    to uncomment a line of CSS, remove the * and the /
+    before and after the text */
+
+
+            /* the "container" is what wraps your entire website */
+            /* if you want something (like the header) to be Wider than
+    the other elements, you will need to move that div outside
+    of the container */
+            #container {
+                max-width: 900px;
+                /* this is the width of your layout! */
+                /* if you change the above value, scroll to the bottom
+      and change the media query according to the comment! */
+                margin: 0 auto;
+                /* this centers the entire page */
+            }
+
+            /* the area below is for all links on your page
+    EXCEPT for the navigation */
+            #container a {
+                color: #ED64F5;
+                font-weight: bold;
+                /* if you want to remove the underline
+      you can add a line below here that says:
+      text-decoration:none; */
+            }
+
+            #header {
+                width: 100%;
+                background-color: #5e4e8c;
+                /* header color here! */
+                height: 150px;
+                /* this is only for a background image! */
+                /* if you want to put images IN the header, 
+      you can add them directly to the <div id="header"></div> element! */
+                background-image: var(--header-image);
+                background-size: 100%;
+            }
+
+            /* navigation section!! */
+            #navbar {
+                height: 40px;
+                background-color: #13092D;
+                /* navbar color */
+                width: 100%;
+            }
+
+            #navbar ul {
+                display: flex;
+                padding: 0;
+                margin: 0;
+                list-style-type: none;
+                justify-content: space-evenly;
+            }
+
+            #navbar li {
+                padding-top: 10px;
+            }
+
+            /* navigation links*/
+            #navbar li a {
+                color: #ED64F5;
+                /* navbar text color */
+                font-weight: 800;
+                text-decoration: none;
+                /* this removes the underline */
+            }
+
+            /* navigation link when a link is hovered over */
+            #navbar li a:hover {
+                color: #a49cba;
+                text-decoration: underline;
+            }
+
+            #flex {
+                display: flex;
+            }
+
+            /* this colors BOTH sidebars
+    if you want to style them separately,
+    create styles for #leftSidebar and #rightSidebar */
+            aside {
+                background-color: #241445;
+                width: 200px;
+                padding: 20px;
+                font-size: smaller;
+                /* this makes the sidebar text slightly smaller */
+            }
+
+
+            /* this is the color of the main content area,
+    between the sidebars! */
+            main {
+                background-color: #43256E;
+                flex: 1;
+                padding: 20px;
+                order: 2;
+            }
+
+            /* what's this "order" stuff about??
+    allow me to explain!
+    if you're using both sidebars, the "order" value
+    tells the CSS the order in which to display them.
+    left sidebar is 1, content is 2, and right sidebar is 3! */
+
+            */ #leftSidebar {
+                order: 1;
+            }
+
+            #rightSidebar {
+                order: 3;
+            }
+
+            footer {
+                background-color: #13092D;
+                /* background color for footer */
+                width: 100%;
+                height: 40px;
+                padding: 10px;
+                text-align: center;
+                /* this centers the footer text */
+            }
+
+            h1,
+            h2,
+            h3 {
+                color: #ED64F5;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+
+            strong {
+                /* this styles bold text */
+                color: #ED64F5;
+            }
+
+            /* this is just a cool box, it's the darker colored one */
+            .box {
+                background-color: #13092D;
+                border: 1px solid #ED64F5;
+                padding: 10px;
+            }
+
+            /* CSS for extras */
+
+            #topBar {
+                width: 100%;
+                height: 30px;
+                padding: 10px;
+                font-size: smaller;
+                background-color: #13092D;
+            }
+
+
+            /* BELOW THIS POINT IS MEDIA QUERY */
+
+            /* so you wanna change the width of your page? 
+    by default, the container width is 900px.
+    in order to keep things responsive, take your new height,
+    and then subtrack it by 100. use this new number as the 
+    "max-width" value below
+    */
+
+            @media only screen and (max-width: 800px) {
+                #flex {
+                    flex-wrap: wrap;
+                }
+
+                aside {
+                    width: 100%;
+                }
+
+                /* the order of the items is adjusted here for responsiveness!
+      since the sidebars would be too small on a mobile device.
+      feel free to play around with the order!
+      */
+                main {
+                    order: 1;
+                }
+
+                #leftSidebar {
+                    order: 2;
+                }
+
+                #rightSidebar {
+                    order: 3;
+                }
+
+                #navbar ul {
+                    flex-wrap: wrap;
+                }
+            }
+        </style>
 </html>
