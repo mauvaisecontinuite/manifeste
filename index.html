@@ -96,12 +96,12 @@
   <div class="box">
     <h1>bienvenue à mauvaise continuité</h1>
 
-    <h2>// transmissions audio</h2>
-    <div id="episodes"><div id="status">// recherche de signal sur les ondes...</div></div>
+    <h2>épisodes</h2>
+    <div id="episodes"><div id="status">en lecture</div></div>
 
-    <h2>// chroniques & blogue</h2>
+    <h2>chroniques de 2200</h2>
     <ul class="blog-list">
-      <li>> <a href="blog/bulletin-01.html">Bulletin 01 : Premier test du réseau d'émission</a></li>
+      <li>> <a href="blog/bulletin-01.html">bulletin 1: manifeste de mauvaise continuité</a></li>
     </ul>
   </div>
 
@@ -113,7 +113,7 @@
       .then(data => {
         const container = document.getElementById('episodes');
         if (!data.items || data.items.length === 0) {
-          container.innerHTML = '<div id="status">// aucune transmission détectée.</div>';
+          container.innerHTML = '<div id="status">aucune publication active</div>';
           return;
         }
         container.innerHTML = data.items.map(ep => `
